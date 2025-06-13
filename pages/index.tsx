@@ -1,5 +1,7 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
+import { load as cocoModalLoad } from '@tensorflow-models/coco-ssd';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,6 +12,23 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+
+export default function ObjectDetection() {
+  const [objectDetector, setObjectDetectors] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const loadOCRModel = async () => {
+      const model = await cocoModalLoad();
+      setObjectDetectors(model);
+      setIsLoading(false);
+  };
+
+  useEffect(() => {
+      loadOCRModel();
+  }, []);
+}
+
 
 export default function Home() {
   return (
