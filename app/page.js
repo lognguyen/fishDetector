@@ -1,4 +1,4 @@
-import ObjectDetector from "@/components/objectDetector";
+import ObjectDetector from "@/components/ObjectDetector";
 
 export default function Home() {
   return (
